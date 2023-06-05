@@ -1,0 +1,39 @@
+@use '../../styles/vars' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  @include for-desktop{
+    gap: 10px;
+  }
+}
+
+.icon {
+  width: $user-icon-size-mobile;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  object-fit: cover;
+  @include for-desktop{
+    width: $user-icon-size-desktop;
+  }
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+
+  // overflow: hidden;
+  // -webkit-line-clamp: 1;
+  // -webkit-box-orient: vertical;
+  // display: -webkit-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  @include for-desktop{
+    font-size: 18px;
+  }
+}
+

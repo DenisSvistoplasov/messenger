@@ -1,0 +1,43 @@
+@use '../../styles/vars' as *;
+
+.link {
+  position: relative;
+
+  // &:not(.active):hover {
+  //   background-color: #ccf;
+  // }
+  // @include hover-user-link;
+  @include user-link
+}
+
+.active {
+  background-color: #44f;
+  color: #fff;
+}
+
+.user {
+  // padding: 3px;
+  // @include side-padding;
+}
+
+.messagesCount {
+  position: absolute;
+  left: calc($user-icon-size-mobile - 10px + $side-padding-mobile);
+  top: -1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #0a0;
+  width: 12px;
+  aspect-ratio: 1/1;
+  z-index: 13;
+  text-align: center;
+  color: #fff;
+  font-size: 9px;
+  @include for-desktop{ 
+    left: calc($user-icon-size-desktop - 10px + $side-padding-desktop);
+    width: 15px; 
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,99 @@
+@use '../../styles/vars' as *;
+
+.wrapper {
+  position: relative;
+  width: fit-content;
+  max-width: 80%;
+  padding: 8px 10px 4px;
+  border-radius: 10px 10px 10px 0;
+  background-color: $interlocutor-message-bg-color;
+  box-shadow: 0 0 8px rgba($color: #000, $alpha: .3);
+
+  @include for-desktop {
+    padding: 10px 12px 6px;
+  }
+
+  &.owner {
+    align-self: flex-end;
+    border-radius: 10px 10px 0 10px;
+    background-color: $user-message-bg-color;
+  }
+
+}
+
+.owner+:not(.owner),
+:not(.owner)+.owner {
+  margin-top: 4px;
+}
+
+.text {
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed #aaa;
+  font-size: 13px;
+  line-height: 1.1;
+  white-space: pre-line;
+  color: #245;
+
+  @include for-desktop {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+  }
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.owner .metadata{
+  justify-content: flex-end;
+}
+
+.elapsedTime {
+  color: #555;
+  font-size: 8px;
+  text-align: right;
+  font-weight: 600;
+  word-spacing: -0.2px;
+  letter-spacing: -0.2px;
+
+  @include for-desktop {
+    font-size: 9px;
+  }
+}
+
+
+.status {
+  display: flex;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 10px;
+  transform: translate(5px);
+
+  &>* {
+    height: 100%;
+  }
+}
+
+
+
+
+
+.tail {
+  position: absolute;
+  right: 100%;
+  bottom: 0;
+  width: 15px;
+  aspect-ratio: 1/1;
+  fill: $interlocutor-message-bg-color;
+}
+
+.owner>.tail {
+  right: unset;
+  left: 100%;
+  fill: $user-message-bg-color;
+  transform: scaleX(-1);
+}

@@ -1,0 +1,49 @@
+@use '../../styles/vars' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 10px 10px;
+  // background-color: #499;
+  background: url('/bg-food.svg') left top / calc(100px + 10%),
+    radial-gradient(at 95% 5%, rgba(110, 210, 170, .6), rgba(250, 255, 50, .6)),
+    radial-gradient(at 15% 85%, rgba(0, 100, 250, .5), rgba(210, 255, 100, .5)), #fff;
+  overflow-y: auto;
+
+  @include for-desktop {
+    padding: 0 20px 20px;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px 0 0;
+
+  @include for-desktop {
+    width: 90%;
+    max-width: 500px;
+    padding: 0 20px;
+  }
+}
+
+.mockMessageList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: $interlocutor-message-bg-color;
+  overflow-y: auto;
+}
+
+.messageForm {
+  margin-top: auto;
+}

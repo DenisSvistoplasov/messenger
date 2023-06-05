@@ -1,0 +1,20 @@
+@use '../../styles/vars' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  // gap: 7px;
+}
+
+.link {
+  // display: block;
+  // @include side-padding;
+  // @include hover-user-link;
+  @include user-link;
+}

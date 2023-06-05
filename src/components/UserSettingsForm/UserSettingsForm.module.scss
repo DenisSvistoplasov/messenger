@@ -1,0 +1,141 @@
+@use '../../styles/vars' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 400px;
+  max-width: 100%;
+  padding: 15px 5px;
+  background-color: #cef;
+
+  @include for-desktop {
+    display: grid;
+    grid-template:
+      'img txt'
+      'img btn' /
+      100px 1fr;
+    gap: 10px 20px;
+    padding: 30px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: .5);
+    background-color: transparent;
+  }
+}
+
+.iconBlock {
+  position: relative;
+  grid-area: img;
+  width: 100px;
+  height: 100px;
+
+  .icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .iconInputLabel {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .iconInput {
+    @include hidden-input;
+  }
+
+  .pencilWrapper {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #eee;
+    opacity: 0.8;
+    transition: background-color .2s ease-in-out;
+
+    .pencilIcon {
+      width: 75%;
+      height: 75%;
+    }
+  }
+
+  @include for-desktop {
+    &:hover {
+      .pencilWrapper {
+        background-color: #afb;
+      }
+    }
+  }
+}
+
+.textContent {
+  grid-area: txt;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 200px;
+
+  @include for-desktop {
+    width: 230px;
+  }
+}
+
+.login {
+  display: flex;
+  justify-content: space-between;
+
+  .loginTitle {}
+
+  .loginValue {
+    font-weight: 600;
+  }
+}
+
+.nameBlock {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  height: fit-content;
+
+  .nameTitle {}
+
+  .nameInput {
+    width: 120px;
+    height: 24px;
+    padding: 3px 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    background-color: #eef;
+
+    @include for-desktop {
+      width: 150px;
+    }
+  }
+
+  .validationError {
+    @include validation-error;
+  }
+}
+
+.saveBtn {
+  grid-area: btn;
+  justify-self: center;
+  padding: 7px 15px;
+  border-radius: 2px;
+  font-weight: 600;
+  background-color: #bcf;
+
+  @include disabled-btn;
+}

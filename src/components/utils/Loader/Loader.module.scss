@@ -1,0 +1,33 @@
+.loader {
+  display: inline-block;
+  overflow: hidden;
+  font-size: 100px;
+  width: 1em;
+  height: 1em;
+}
+.loader::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: .1em solid;
+  border-color: #fff transparent;
+  animation: loader 1.2s linear infinite;
+}
+.center {
+  display: block;
+  margin: 5% auto;
+}
+.dark::after{
+  border-color: #222 transparent;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

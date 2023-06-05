@@ -1,0 +1,19 @@
+@use '../../styles/vars' as *;
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px 5px 5px;
+  background-color: #8bf;
+  @include for-desktop{
+    padding: 10px 20px;
+  }
+}
+
+.exitBtn{
+  font-weight: 600;
+  @include for-desktop{
+    font-size: 16px;
+  }
+}

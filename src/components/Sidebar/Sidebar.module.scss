@@ -1,0 +1,14 @@
+@use '../../styles/vars' as *;
+
+.wrapper {
+  display: grid;
+  grid-template: auto 1fr / 100%;
+  row-gap: 20px;
+  height: 100%;
+  width: 22%;
+  min-width: 82px;
+  padding-top: 5px;
+  color: #267;
+  background: radial-gradient(at 95% 90%, #bfa, #bdf);
+  overflow-y: hidden;
+}

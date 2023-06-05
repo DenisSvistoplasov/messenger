@@ -1,0 +1,22 @@
+.wrapper {
+  width: 300px;
+  margin: 50px auto;
+
+}
+
+.form {
+  margin-bottom: 10px;
+}
+
+.redirect {
+  text-align: center;
+  font-size: 14px;
+
+  a {
+    color: #17f;
+    text-decoration: underline;
+    &:hover{
+      color: #04e;
+    }
+  }
+}

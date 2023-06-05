@@ -1,0 +1,72 @@
+$desktop-breakpoint: 600px;
+$chat-bg-color: #044;
+$user-message-bg-color: #def;
+$interlocutor-message-bg-color: #ffe;
+$message-textarea-bg-color: #fff;
+$user-icon-size-mobile: 20px;
+$user-icon-size-desktop: 30px;
+$side-padding-mobile: 5px;
+$side-padding-desktop: 20px;
+
+@mixin side-padding {
+  padding-left: 5px;
+  padding-right: 5px;
+
+  @media (min-width:600px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@mixin for-desktop {
+  @media (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin hover-user-link {
+  @media (min-width: $desktop-breakpoint) {
+    // transition: background-color .2s ease-in-out;
+    transition: box-shadow .15s ease-in-out;
+
+    &:not(.active):hover {
+      // background-color: #9bf;
+      box-shadow: inset 0 0 7px rgba($color: #02a, $alpha: 1);
+    }
+  }
+}
+
+@mixin user-link {
+  display: block;
+  padding: 3px;
+  @include side-padding;
+  @include hover-user-link;
+}
+
+@mixin validation-error {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  padding-bottom: 2px;
+  font-size: 10px;
+  color: #900;
+}
+
+@mixin hidden-input {
+  position: absolute;
+  z-index: -10;
+  width: 0;
+  height: 0;
+  appearance: none;
+  opacity: 0;
+}
+
+@mixin disabled-btn {
+  &:disabled {
+    color: #999;
+    border-color: #bbb;
+    background-color: #eee;
+    cursor: progress;
+  }
+}
+
