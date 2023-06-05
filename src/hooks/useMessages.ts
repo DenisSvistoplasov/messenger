@@ -9,23 +9,18 @@ export function useMessages(dialogId: string) {
   const { isAuth, userId } = useAuth();
 
   useEffect(() => {
-    if (isAuth) {
-      // return messageAPI.onMessagesChange(dialogId, messages => {
-      //   dispatch(setMessagesData({ dialogId, messages }));
-      // });
-      const returnedData = onMessagesChange(
-        dialogId,
-        userId,
-        messages => dispatch(setMessagesData({ dialogId, messages })),
-        messages => dispatch(addMessagesData({ dialogId, messages }))
-      );
+    const returnedData = onMessagesChange(
+      dialogId,
+      userId,
+      messages => dispatch(setMessagesData({ dialogId, messages })),
+      messages => dispatch(addMessagesData({ dialogId, messages }))
+    );
 
-      return () => {
-        returnedData.messagesPromise?.then(() => {
-          returnedData.unsubscribe?.();
-        });
-      };
-    }
+    return () => {
+      returnedData.messagesPromise?.then(() => {
+        returnedData.unsubscribe?.();
+      });
+    };
   }, [isAuth, dialogId, userId]);
 
   return useAppSelector(selectMessages(dialogId));

@@ -140,55 +140,41 @@ export const messageAPI = {
 };
 
 export function onMessagesChange(dialogId: string, userId: string, getHandler: (messages: IMessage[]) => void, updateHandler: (messages: IMessage[]) => void) {
-  console.log('onMessagesChange 1');
   const returningData = {
     unsubscribe: null as null | Unsubscribe,
     messagesPromise: null as null | Promise<any>
   };
   let lastMessageCreatedAt: Timestamp;
 
-  const q = query(messagesRef, where('dialogId', '==', dialogId), orderBy('createdAt'), limit(MESSAGES_COUNT_LIMIT));
+  const q1 = query(messagesRef, where('senderId', '==', userId), where('dialogId', '==', dialogId), orderBy('createdAt'), limit(MESSAGES_COUNT_LIMIT));
+  const q2 = query(messagesRef, where('recipientId', '==', userId), where('dialogId', '==', dialogId), orderBy('createdAt'), limit(MESSAGES_COUNT_LIMIT));
 
-  returningData.messagesPromise = getDocs(q).then(querySnapshot => {
-    console.log('onMessagesChange 3');
-    const messages: IMessage[] = [];
+  const messages: IMessage[] = [];
+  const sentMessagesPromise = getDocs(q1).then(querySnapshot => {
 
     querySnapshot.forEach(doc => {
       const messageDB = doc.data() as IDBMessage;
       messages.push({ ...messageDB, createdAt: messageDB.createdAt.toDate().toString() } as IMessage);
       lastMessageCreatedAt = messageDB.createdAt;
     });
+  }).catch(console.dir);
 
+  const receivedMessagesPromise = getDocs(q2).then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      const messageDB = doc.data() as IDBMessage;
+      messages.push({ ...messageDB, createdAt: messageDB.createdAt.toDate().toString() } as IMessage);
+      lastMessageCreatedAt = messageDB.createdAt;
+    });
+  }).catch(console.dir);
+
+  returningData.messagesPromise = Promise.all([sentMessagesPromise, receivedMessagesPromise]).then(() => {
+    messages.sort((message1, message2) => new Date(message1.createdAt) > new Date(message2.createdAt) ? 1 : -1);
     getHandler(messages);
     onNewIncomingMessage();
-    console.log('onMessagesChange 4');
-  }).catch(console.dir);
-  console.log('onMessagesChange 5');
+  });
 
   return returningData;
 
-  function onNewMessageCome() {
-    returningData.unsubscribe?.();
-
-    const q = lastMessageCreatedAt ?
-      query(messagesRef, where('dialogId', '==', dialogId), orderBy('createdAt'), startAfter(lastMessageCreatedAt)) :
-      query(messagesRef, where('dialogId', '==', dialogId), orderBy('createdAt'));
-
-    returningData.unsubscribe = onSnapshot(q, querySnapshot => {
-      const messages: IMessage[] = [];
-
-      querySnapshot.forEach(doc => {
-        const messageDB = doc.data() as IDBMessage;
-        messages.push({ ...messageDB, createdAt: messageDB.createdAt.toDate().toString() } as IMessage);
-        lastMessageCreatedAt = messageDB.createdAt;
-      });
-
-      if (!querySnapshot.empty) {
-        updateHandler(messages);
-        onNewMessageCome();
-      }
-    });
-  }
   function onNewIncomingMessage() {
     returningData.unsubscribe?.();
 
