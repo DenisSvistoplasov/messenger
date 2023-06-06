@@ -48,6 +48,7 @@ export const selectUser = (state: RootState) => state.user;
 
 export const listenUserData = (id: string): AppThunk<Unsubscribe> => (dispatch) => {
   return userAPI.onUserDataChange(id, userData => {
+    console.log('got user data', userData);
     dispatch(setUserData(userData));
   });
 };

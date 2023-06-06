@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 import { Loader } from "./Loader/Loader";
 
-export function AccessChecker({children}:{children:ReactNode}) {
+export function AccessChecker({ children }: { children: ReactNode; }) {
   const { pathname, push } = useRouter();
   const { isAuth, isAuthLoading } = useAuth();
   const isAllowedPath = guestAllowedPaths.some(path => pathname.startsWith(path));

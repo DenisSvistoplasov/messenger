@@ -20,13 +20,13 @@ export function UnconnectedUsersList({ className }: IUnconnectedUsersListProps) 
 
   return (
     <div className={classnames(styles.wrapper, className)}>
-      <MetaConditionalRender
-        isLoading={isLoading}
-        error={error}
-        isEmpty={users.length === 0}
-        emptyMessage='Нет других пользователей'
-      >
-        <SimpleBar style={{ maxHeight: '100%' }}>
+      <SimpleBar style={{ maxHeight: '100%' }}>
+        <MetaConditionalRender
+          isLoading={isLoading}
+          error={error}
+          isEmpty={users.length === 0}
+          emptyMessage='Нет других пользователей'
+        >
           <ul className={styles.list}>
             {users.map(user => (
               <li key={user.id}>
@@ -36,8 +36,8 @@ export function UnconnectedUsersList({ className }: IUnconnectedUsersListProps) 
               </li>
             ))}
           </ul>
-        </SimpleBar>
-      </MetaConditionalRender>
+        </MetaConditionalRender>
+      </SimpleBar>
     </div>
   );
 }

@@ -223,9 +223,11 @@ export const authAPI = {
   },
 
   signUp(login: string, password: string) {
-    return createUserWithEmailAndPassword(auth, loginToEmail(login), password).then(userCredential => {
-      return userAPI.createUser(userCredential.user.uid, login);
+    const signUpPromise = createUserWithEmailAndPassword(auth, loginToEmail(login), password);
+    signUpPromise.then(userCredential => {
+      return  userAPI.createUser(userCredential.user.uid, login);
     });
+    return signUpPromise;
   },
 
   logOut() {

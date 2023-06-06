@@ -40,6 +40,8 @@ export function Sidebar_({ className }: ISidebarProps) {
   return (
     <aside className={classnames(styles.wrapper, className)}>
       <Dialogs />
+      <div className={styles.delimiter}>
+      </div>
       <UnconnectedUsersList />
     </aside>
   );

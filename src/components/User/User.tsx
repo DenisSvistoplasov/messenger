@@ -13,11 +13,11 @@ interface IUserProps {
   userData: IUser;
 }
 
-export function User({ className, userData:{login, displayedName, icon}}: IUserProps) {
+export function User({ className, userData: { login, displayedName, icon, id } }: IUserProps) {
 
   return (
     <div className={classnames(styles.wrapper, className)} >
-      <img src={icon || DEFAULT_USER_ICON} alt="user icon" className={styles.icon} />
+      <img src={icon || DEFAULT_USER_ICON} alt="user icon" className={styles.icon} title={id} />
       <span className={styles.name}>{displayedName || login}</span>
     </div>
   );

@@ -1,9 +1,10 @@
 import { classnames } from '@/utils/classnames';
 import styles from './InfoMessage.module.scss';
+import { ReactNode } from 'react';
 
 interface IInfoMessageProps {
   className?: string;
-  message: string;
+  message: string | ReactNode;
   block?: boolean;
 }
 

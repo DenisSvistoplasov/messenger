@@ -23,7 +23,7 @@ export default function SignUp() {
     setServerError('');
     authAPI.signUp(login, password)
       .then(() => {
-        push(Paths.settings);
+        // push(Paths.settings);
       })
       .catch((error:FirebaseError) => {
         console.log('error: ', error);
